@@ -5,6 +5,18 @@ using DAFTech.DriverLicenseSystem.Api.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
 // Add services to the container
 builder.Services.AddControllers();
 
@@ -25,6 +37,9 @@ builder.Services.AddScoped<VerificationService>();
 builder.Services.AddScoped<JwtHelper>();
 
 var app = builder.Build();
+
+// Use CORS
+app.UseCors("AllowAll");
 
 app.UseHttpsRedirection();
 app.MapControllers();
