@@ -1,3 +1,4 @@
+import 'home_screen.dart';
 import 'package:flutter/material.dart';
 import '../services/api_service.dart';
 
@@ -25,23 +26,27 @@ class _LoginScreenState extends State<LoginScreen> {
       isLoading = false;
     });
 
-    if (result['success']) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Successful!')),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login Failed: ${result['error']}')),
-      );
-    }
+  if (result['success']) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    const SnackBar(content: Text('Login Successful!')),
+  );
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => HomeScreen()),
+  );
+} else {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(content: Text('Login Failed: ${result['error']}')),
+  );
+}
   }
+@override
+void dispose() {
+  usernameController.dispose();
+  passwordController.dispose();
+  super.dispose();
+}
 
-  @override
-  void dispose() {
-    usernameController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
