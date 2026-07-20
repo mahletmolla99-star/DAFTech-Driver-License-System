@@ -3189,11 +3189,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
+      "projectUniqueName": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
       "projectName": "DAFTech.DriverLicenseSystem.Api",
-      "projectPath": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
+      "projectPath": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
       "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-      "outputPath": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\obj\\",
+      "outputPath": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

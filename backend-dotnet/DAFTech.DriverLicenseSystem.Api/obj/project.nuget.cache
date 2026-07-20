@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qZwrzWSza2c=",
+  "dgSpecHash": "GtxcAs11L9E=",
   "success": true,
-  "projectFilePath": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
+  "projectFilePath": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\azure.core\\1.47.1\\azure.core.1.47.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\azure.identity\\1.14.2\\azure.identity.1.14.2.nupkg.sha512",
@@ -59,9 +59,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
-      "projectPath": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
+      "projectPath": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\DAFTech-DriverLicense-System\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
+      "filePath": "C:\\DAFTech-DriverLicense-System\\backend-dotnet\\DAFTech.DriverLicenseSystem.Api\\DAFTech.DriverLicenseSystem.Api.csproj",
       "libraryId": "Microsoft.OpenApi",
       "targetGraphs": [
         "net10.0"

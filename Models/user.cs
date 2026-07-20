@@ -1,3 +1,4 @@
+public DateTime? LoginDate { get; set; }
 namespace DAFTech.DriverLicenseSystem.Api.Models
 {
     public class User
