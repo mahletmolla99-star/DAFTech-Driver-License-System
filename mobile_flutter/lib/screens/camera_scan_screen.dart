@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+﻿import 'package:flutter/material.dart';
 import 'driver_registration_screen.dart';
 
 class CameraScanScreen extends StatefulWidget {
@@ -9,63 +7,75 @@ class CameraScanScreen extends StatefulWidget {
 }
 
 class _CameraScanScreenState extends State<CameraScanScreen> {
-  late MobileScannerController scannerController;
-  String qrData = '';
-  String ocrText = '';
-  bool isScanning = false;
+  final licenseIdController = TextEditingController();
+  final ocrTextController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    scannerController = MobileScannerController();
+    licenseIdController.text = 'ETH-DL-2024-001';
+    ocrTextController.text = 'John Doe, License Number: ETH-DL-2024-001';
   }
 
-  Future<void> extractOCR() async {
-    setState(() {
-      ocrText = 'OCR extracted from license';
-    });
-  }
-
-  void handleQRScanned(Barcode barcode) async {
-    if (!isScanning) {
-      setState(() {
-        isScanning = true;
-        qrData = barcode.rawValue ?? '';
-      });
-      await extractOCR();
-      
-      if (mounted) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DriverRegistrationScreen(
-              qrData: qrData,
-              ocrText: ocrText,
-            ),
-          ),
-        );
-      }
+  void proceedToRegistration() {
+    if (licenseIdController.text.isEmpty || ocrTextController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please fill in all fields')),
+      );
+      return;
     }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DriverRegistrationScreen(
+          qrData: licenseIdController.text,
+          ocrText: ocrTextController.text,
+        ),
+      ),
+    );
   }
 
   @override
   void dispose() {
-    scannerController.dispose();
+    licenseIdController.dispose();
+    ocrTextController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Scan Driver License')),
-      body: MobileScanner(
-        controller: scannerController,
-        onDetect: (capture) {
-          final List<Barcode> barcodes = capture.barcodes;
-          for (final barcode in barcodes) {
-            handleQRScanned(barcode);
-          }
-        },
+      appBar: AppBar(title: const Text('Scan or Enter License')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text('Camera not available on web. Enter manually:'),
+            const SizedBox(height: 20),
+            TextField(
+              controller: licenseIdController,
+              decoration: const InputDecoration(
+                labelText: 'License ID (QR)',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: ocrTextController,
+              maxLines: 3,
+              decoration: const InputDecoration(
+                labelText: 'OCR Text',
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: proceedToRegistration,
+              child: const Text('Proceed to Registration'),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,7 @@
- using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using DAFTech.DriverLicenseSystem.Api.Models;
 using DAFTech.DriverLicenseSystem.Api.Models.DTOs;
+using DAFTech.DriverLicenseSystem.Api.Data;
 
 namespace DAFTech.DriverLicenseSystem.Api.Controllers
 {
@@ -7,16 +9,39 @@ namespace DAFTech.DriverLicenseSystem.Api.Controllers
     [Route("api/[controller]")]
     public class DriverController : ControllerBase
     {
-        [HttpPost("register")]
-        public IActionResult RegisterDriver([FromBody] RegisterDriverDto request)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        private readonly DriverLicenseDbContext _context;
 
-            return Ok(new { message = "Driver registration endpoint working", licenseId = request.LicenseId });
+        public DriverController(DriverLicenseDbContext context)
+        {
+            _context = context;
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterDriver([FromBody] RegisterDriverDto request)
+        {
+            if (string.IsNullOrEmpty(request.LicenseId) || string.IsNullOrEmpty(request.FullName))
+                return BadRequest(new { message = "License ID and Full Name are required" });
+
+            var existing = _context.Drivers.FirstOrDefault(d => d.LicenseId == request.LicenseId);
+            if (existing != null)
+                return BadRequest(new { message = "License already registered" });
+
+            var driver = new Driver
+            {
+                LicenseId = request.LicenseId,
+                FullName = request.FullName,
+                DateOfBirth = request.DateOfBirth,
+                LicenseType = request.LicenseType,
+                ExpiryDate = request.ExpiryDate,
+                QRRawData = request.QRRawData,
+                OCRRawText = request.OCRRawText,
+                CreatedDate = DateTime.Now
+            };
+
+            _context.Drivers.Add(driver);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Driver registered successfully", licenseId = request.LicenseId });
         }
     }
 }
-

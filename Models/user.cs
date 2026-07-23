@@ -1,4 +1,3 @@
-public DateTime? LoginDate { get; set; }
 namespace DAFTech.DriverLicenseSystem.Api.Models
 {
     public class User
@@ -8,5 +7,6 @@ namespace DAFTech.DriverLicenseSystem.Api.Models
         public string PasswordHash { get; set; }
         public DateTime CreatedDate { get; set; }
         public string Status { get; set; }
+        public DateTime? LoginDate { get; set; }
     }
 }
